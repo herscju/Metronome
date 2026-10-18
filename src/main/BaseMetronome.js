@@ -4,6 +4,9 @@
  */
 export default class BaseMetronome {
 
+    static START = 1;
+    static STOP = 2;
+
     tempo = 0;
     counter = 0;
     playing = false;
@@ -34,11 +37,11 @@ export default class BaseMetronome {
         if (instance && callback) {
             //console.log("Run callback function with instance '" + instance + "'.");
             switch(instance) {
-                case 1:
+                case BaseMetronome.START:
                     callback(instance, this.counter++);
                     break;
 
-                case 2:
+                case BaseMetronome.STOP:
                     callback(instance, this.counter);
                     break;
             }
