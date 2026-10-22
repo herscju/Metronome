@@ -12,9 +12,9 @@ export default class WorkerMetronome extends BaseMetronome {
      * @param {*} tempo 
      * @param {*} counter
      */
-    constructor(tempo, counter) {
+    constructor(tempo, counter, worker = "./../main/Worker.js") {
         super(tempo, counter);
-        this.worker = new Worker('./../main/Worker.js');
+        this.worker = new Worker(worker);
     }
 
     /**
@@ -46,7 +46,7 @@ export default class WorkerMetronome extends BaseMetronome {
         super.stop(instance, callback);
 
         this.worker.onmessage = (evnt) => { this.worker.postMessage({ "interval": 0 }); this.worker.postMessage("stop"); this.click(instance, callback); };
-    
+
         return this;
     }
 }
